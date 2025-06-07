@@ -1,3 +1,5 @@
+/* Projects.module.css */
+
 .projectsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -22,7 +24,8 @@
 
 .cardImage {
   width: 100%;
-  display: block;
+  height: 180px;
+  object-fit: cover;
 }
 
 .cardInfo {

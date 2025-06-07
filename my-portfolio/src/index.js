@@ -1,12 +1,12 @@
 // src/index.js
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";          // make sure App.jsx or App.js exists
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-// Mount <App /> into <div id="root">
-ReactDOM.render(
+const rootContainer = document.getElementById("root");
+const root = ReactDOM.createRoot(rootContainer);
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

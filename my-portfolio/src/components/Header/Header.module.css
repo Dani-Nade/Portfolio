@@ -1,0 +1,186 @@
+/* Header.module.css */
+
+/*─────────────────────────────────────────────────────────────────────────────
+  0) Global reset
+─────────────────────────────────────────────────────────────────────────────*/
+:global(html, body) {
+  margin: 0;
+  padding: 0;
+  background-color: #0d0d1a;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  1) Page wrapper
+─────────────────────────────────────────────────────────────────────────────*/
+.headerWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0d0d1a;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Utility to center inner sections */
+.section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  2) About Me section
+─────────────────────────────────────────────────────────────────────────────*/
+.aboutSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 0;
+}
+
+.aboutContent {
+  flex: 1 1 50%;
+  padding-right: 2rem;
+}
+
+.aboutTitle {
+  display: inline-block;
+  background: linear-gradient(90deg, #6a47ce, #a47cf0);
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.aboutText p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Profile image + gradient border wrapper
+─────────────────────────────────────────────────────────────────────────────*/
+.profileImageWrapper {
+  position: relative;
+  flex: 0 0 300px;
+}
+
+/* the “behind” border */
+.profileBorder {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  border: 4px solid;
+  /* gradient border via border-image */
+  border-image: linear-gradient(135deg, #6a47ce, #a47cf0) 1;
+  border-radius: 50px;
+}
+
+/* your actual photo */
+.profileImageWrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  3) Contact section
+─────────────────────────────────────────────────────────────────────────────*/
+.contactSection {
+  padding: 2rem 0 4rem;
+}
+
+.contactTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.contactList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem 2rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.contactItem svg {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  4) Skills / Education “pill” container
+─────────────────────────────────────────────────────────────────────────────*/
+.skillsContainer {
+  background: #1f1738;
+  border-radius: 50px;
+  padding: 3rem 2rem;
+  margin-bottom: 4rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blockTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f0e6ff;
+}
+
+.blockContent {
+  line-height: 1.5;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.inlineList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.inlineList li::before {
+  content: "•";
+  margin-right: 0.25rem;
+  color: #a47cf0;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  5) Mobile responsive tweaks
+─────────────────────────────────────────────────────────────────────────────*/
+@media (max-width: 800px) {
+  .aboutSection {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .aboutContent {
+    padding: 0;
+    margin-top: 2rem;
+  }
+  .profileImageWrapper {
+    margin: 0 auto;
+  }
+}

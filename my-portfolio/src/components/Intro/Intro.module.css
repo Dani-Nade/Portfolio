@@ -1,0 +1,94 @@
+/* src/components/Intro/Intro.module.css */
+
+/* 1) Full‐screen white overlay that will fade out at the end */
+.introContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;       /* white background; change to whatever you like */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 9999;                    /* on top of everything else */
+  animation: containerFadeOut 5s ease forwards;
+  /* → from 0%→80%: keep opacity=1; at 100%: fade opacity→0 & hide overlay */
+}
+
+/* 2) The large “Danish Nadeem” text in the middle */
+.introText {
+  position: absolute;
+  top: 50%;                         /* start vertically centered */
+  left: 50%;                        /* start horizontally centered */
+  transform: translate(-50%, -50%) scale(0.5);
+  font-size: 4rem;                  /* very large text */
+  font-weight: 600;
+  color: #2a6f33;                   /* match your theme green */
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  opacity: 0;
+  animation: introSequence 5s ease forwards;
+  /* → this keyframe handles fade‐in, bounce, then move & shrink to bottom */
+}
+
+/* 3) Keyframes for the text: fade in, bounce, then move+shrink */
+@keyframes introSequence {
+  /* at 0% → invisible, small, centered */
+  0% {
+    opacity: 0;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  /* at 10% → fully visible, normal size, still centered */
+  10% {
+    opacity: 1;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* at 20% → bounce bigger */
+  20% {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  /* at 30% → settle back to normal size, still centered */
+  30% {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* at 50% → hold at center, normal size */
+  50% {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* at 70% → move down to 80% vertical, shrink text to 60% */
+  70% {
+    top: 80%;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  /* at 100% → remain at bottom/center, small size, full opacity */
+  100% {
+    top: 80%;
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 1;
+  }
+}
+
+/* 4) Keyframes for fading the overlay itself (container) */
+@keyframes containerFadeOut {
+  /* 0%–80% → overlay is fully opaque */
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  80% {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* at 100% → fade overlay out completely & hide */
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

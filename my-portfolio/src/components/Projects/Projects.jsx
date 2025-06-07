@@ -1,12 +1,14 @@
+// Projects.jsx
 import React, { useEffect, useRef } from "react";
 import styles from "./Projects.module.css";
 import proj1 from "../../assets/images/project1.jpg";
 import proj2 from "../../assets/images/project2.jpg";
-// …import more project images
+// (Add more project images/imports as needed)
 
 export default function Projects() {
   const cardsRef = useRef([]);
 
+  // Set up Intersection Observer to add “visible” class when a card enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -19,16 +21,27 @@ export default function Projects() {
       },
       { threshold: 0.2 }
     );
+
     cardsRef.current.forEach((card) => {
       if (card) observer.observe(card);
     });
+
     return () => observer.disconnect();
   }, []);
 
+  // Example project data; swap with your real project info
   const projects = [
-    { img: proj1, title: "Project One", desc: "Description of Project One…" },
-    { img: proj2, title: "Project Two", desc: "Description of Project Two…" },
-    // …add as many as you like
+    {
+      img: proj1,
+      title: "Project One",
+      desc: "A short description of Project One.",
+    },
+    {
+      img: proj2,
+      title: "Project Two",
+      desc: "A short description of Project Two.",
+    },
+    // …add more objects for additional cards
   ];
 
   return (

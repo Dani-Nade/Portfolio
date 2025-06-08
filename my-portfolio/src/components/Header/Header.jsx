@@ -1,111 +1,210 @@
-import React from "react";
+// src/components/Header/Header.jsx
+
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./Header.module.css";
 
-import { FiMail, FiPhone, FiLinkedin } from "react-icons/fi";
-import { FaBehance } from "react-icons/fa";
+import Nav from "../Nav/Nav";
 
-import profilePic from "../../assets/images/profile.png";
+import { FiMail, FiPhone, FiLinkedin } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
+
+import profilePic      from "../../assets/images/profile.png";
+import dbIcon          from "../../assets/images/icons/DB.png";
+import flutterIcon     from "../../assets/images/icons/Flutter.png";
+import illustratorIcon from "../../assets/images/icons/illustrator.png";
+import reactIcon       from "../../assets/images/icons/react.png";
 
 export default function Header() {
-  return (
-    <div className={styles.headerWrapper}>
-      
-      {/* ─── About Me ─────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.aboutSection}`}>
-        <div className={styles.aboutContent}>
-          <div className={styles.aboutTitle}>About me</div>
-          <div className={styles.aboutText}>
-            <p>
-              Hi! My name is <strong>Danish Nadeem</strong>. I’m a Front-End Developer
-              based in [Your City], building animated, interactive web experiences.
-            </p>
-            <p>
-              My objective: To continually learn new tools and techniques, craft
-              beautiful UIs, and contribute to projects that make people’s
-              lives easier.
-            </p>
-          </div>
-        </div>
+  // refs for each section
+  const aboutRef   = useRef(null);
+  const contactRef = useRef(null);
+  const skillsRef  = useRef(null);
 
-        {/* profile wrapper now has two layers: border + image */}
-        <div className={styles.profileImageWrapper}>
-          <div className={styles.profileBorder} />
-          <img src={profilePic} alt="My profile" />
-        </div>
-      </section>
-      
-      {/* ─── Contact Info ─────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.contactSection}`}>
-        <div className={styles.contactTitle}>Contact</div>
-        <div className={styles.contactList}>
-          <div className={styles.contactItem}>
-            <FiMail /> <a href="mailto:youremail@example.com">youremail@example.com</a>
-          </div>
-          <div className={styles.contactItem}>
-            <FiPhone /> <a href="tel:+1234567890">+1 (234) 567-890</a>
-          </div>
-          <div className={styles.contactItem}>
-            <FiLinkedin /> <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a>
-          </div>
-          <div className={styles.contactItem}>
-            <FaBehance /> <a href="https://behance.net/yourprofile">behance.net/yourprofile</a>
-          </div>
-        </div>
-      </section>
-      
-      {/* ─── Skills / Education / etc. ────────────────────────── */}
-      <section className={`${styles.section} ${styles.skillsContainer}`}>
-        <div className={styles.skillsGrid}>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Education</div>
-            <div className={styles.blockContent}>
-              FPT University — Graphic Design<br/>
-              <small>2020 – Now</small>
+  // visibility state
+  const [aboutVisible,   setAboutVisible]   = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+  const [skillsVisible,  setSkillsVisible]  = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        switch (entry.target.id) {
+          case "about":
+            setAboutVisible(true);
+            break;
+          case "contact":
+            setContactVisible(true);
+            break;
+          case "skills":
+            setSkillsVisible(true);
+            break;
+          default:
+            // no other sections—just break
+            break;
+        }
+
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    [aboutRef, contactRef, skillsRef].forEach((r) => {
+      if (r.current) observer.observe(r.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      <Nav />
+
+      <div className={styles.headerWrapper}>
+        {/* ─── About Me ─────────────────────────────────────────── */}
+        <section
+          id="about"
+          ref={aboutRef}
+          className={[
+            styles.section,
+            styles.aboutSection,
+            aboutVisible && styles.visibleSection
+          ].filter(Boolean).join(" ")}
+        >
+          <div className={styles.aboutContent}>
+            <h2 className={styles.aboutTitle}>About me</h2>
+            <div className={styles.aboutText}>
+              <p>
+                Hi! My name is <strong>Danish Nadeem</strong>. I’m a Front-End
+                Developer based in Metropolis, building animated, interactive
+                web experiences.
+              </p>
+              <p>
+                In 2023 I led a team of 3 on an AI-powered dashboard that
+                increased reporting speed by 40%. I love turning complex APIs
+                into delightful interfaces.
+              </p>
             </div>
           </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Technical skill</div>
-            <ul className={styles.inlineList}>
-              <li>Figma</li>
-              <li>Illustrator</li>
-              <li>Photoshop</li>
-              <li>After Effects</li>
-            </ul>
+
+          <div className={styles.profileImageWrapper}>
+            {/* Aptitude */}
+            <div className={styles.iconsContainer}>
+              <div className={styles.iconsRow}>
+                <img src={dbIcon}          className={styles.icon} alt="DB" />
+                <img src={illustratorIcon} className={styles.icon} alt="AI" />
+                <img src={flutterIcon}     className={styles.icon} alt="Flutter" />
+                <img src={reactIcon}       className={styles.icon} alt="React" />
+              </div>
+            </div>
+            <img
+              src={profilePic}
+              className={styles.profileImg}
+              alt="My profile"
+            />
           </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Soft skill</div>
-            <ul className={styles.inlineList}>
-              <li>Teamwork</li>
-              <li>Communication</li>
-              <li>Critical Thinking</li>
-              <li>Time Management</li>
-            </ul>
+        </section>
+
+        {/* ─── Contact Info ─────────────────────────────────────── */}
+        <section
+          id="contact"
+          ref={contactRef}
+          className={[
+            styles.section,
+            styles.contactSection,
+            contactVisible && styles.visibleSection
+          ].filter(Boolean).join(" ")}
+        >
+          <h2 className={styles.contactTitle}>Contact</h2>
+          <div className={styles.contactList}>
+            <div className={styles.contactItem}>
+              <FiMail />{" "}
+              <a href="mailto:d.nadeem@example.com">d.nadeem@example.com</a>
+            </div>
+            <div className={styles.contactItem}>
+              <FiPhone /> <a href="tel:+1234567890">+1 (234) 567-890</a>
+            </div>
+            <div className={styles.contactItem}>
+              <FiLinkedin />{" "}
+              <a href="https://linkedin.com/in/danishnadeem">
+                linkedin.com/in/danishnadeem
+              </a>
+            </div>
+            <div className={styles.contactItem}>
+              <FaGithub />{" "}
+              <a href="https://github.com/danishnadeem">
+                github.com/danishnadeem
+              </a>
+            </div>
           </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Skill set</div>
-            <ul className={styles.inlineList}>
-              <li>User Research</li>
-              <li>Wireframing</li>
-              <li>Prototyping</li>
-              <li>App Design</li>
-            </ul>
+        </section>
+
+        {/* ─── Skills & Education ───────────────────────────────── */}
+        <section
+          id="skills"
+          ref={skillsRef}
+          className={[
+            styles.section,
+            styles.skillsContainer,
+            skillsVisible && styles.visibleSection
+          ].filter(Boolean).join(" ")}
+        >
+          <h2 className={styles.blockTitle}>Skills & Education</h2>
+          <div className={styles.skillsGrid}>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Education</div>
+              <div className={styles.blockContent}>
+                Metropolis University — B.Sc. Computer Science<br />
+                <small>2018 – 2022</small>
+              </div>
+            </div>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Technical Skills</div>
+              <ul className={styles.inlineList}>
+                <li>JavaScript</li>
+                <li>TypeScript</li>
+                <li>Python</li>
+                <li>HTML & CSS</li>
+              </ul>
+            </div>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Frameworks</div>
+              <ul className={styles.inlineList}>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>Express</li>
+                <li>Next.js</li>
+              </ul>
+            </div>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Tools</div>
+              <ul className={styles.inlineList}>
+                <li>Git & GitHub</li>
+                <li>Docker</li>
+                <li>Webpack</li>
+                <li>VS Code</li>
+              </ul>
+            </div>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Soft Skills</div>
+              <ul className={styles.inlineList}>
+                <li>Teamwork</li>
+                <li>Problem Solving</li>
+                <li>Communication</li>
+                <li>Time Management</li>
+              </ul>
+            </div>
+            <div className={styles.block}>
+              <div className={styles.blockTitle}>Languages</div>
+              <ul className={styles.inlineList}>
+                <li>English (Fluent)</li>
+                <li>Spanish (Intermediate)</li>
+                <li>Japanese (Basic)</li>
+              </ul>
+            </div>
           </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Interest</div>
-            <ul className={styles.inlineList}>
-              <li>Design Trends</li>
-              <li>Technology</li>
-            </ul>
-          </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Language</div>
-            <ul className={styles.inlineList}>
-              <li>Vietnamese</li>
-              <li>English (Pre-intermediate)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }

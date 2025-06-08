@@ -1,18 +1,167 @@
-/* Nav.module.css */
+@font-face {
+  font-family: 'Japan Daisuki';
+  src: url('../../assets/fonts/Japan Daisuki.otf') format('woff2'),
+       url('../../assets/fonts/Japan Daisuki.otf')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  1) Top bar: slide+fade in, semi-transparent
+─────────────────────────────────────────────────────────────────────────────*/
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.5);        /* more see-through */
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  z-index: 100;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  animation: slideDownFade 0.5s ease-out forwards;
+}
+@keyframes slideDownFade {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navInner {
+  width: 90%; max-width:1200px;
+  margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+}
+
+.logo {
+  font-family:'Japan Daisuki',cursive;
+  font-size:1.8rem; color:#2E2E2E;
+  text-decoration:none;
+  transition:transform .3s ease;
+}
+.logo:hover { transform:scale(1.05); }
 
 .navList {
-  display: flex;
-  gap: 2rem;
+  list-style:none; display:flex; gap:2rem;
+  margin:0; padding:0;
 }
+.navLink {
+  font-family:'Source Sans Pro',sans-serif;
+  font-size:1rem; color:#3A3A3A;
+  text-decoration:none;
+  position:relative;
+  padding:.25rem .5rem;
+  transition:color .3s ease,transform .3s ease;
+}
+.navLink::after {
+  content:""; position:absolute; bottom:-4px; left:0;
+  width:0; height:2px; background:#556B2F;
+  transition:width .3s ease;
+}
+.navLink:hover {
+  color:#556B2F; transform:translateY(-2px);
+}
+.navLink:hover::after { width:100%; }
 
-.navLinkItem {
-  color: #ffffff;
-  font-size: 1.2rem;
-  text-decoration: none;
-  font-weight: 500;
+/*─────────────────────────────────────────────────────────────────────────────
+  2) Toggle ☰ button: pop+fade+float
+─────────────────────────────────────────────────────────────────────────────*/
+.iconButton {
+  position: fixed;
+  top: 1rem; left: 1rem;
+  width: 3rem; height: 3rem;
+  border: none;
+  background: rgba(255,255,255,0.6);        /* semi-transparent */
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #3A3A3A;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 250;
+
+  opacity: 0;
+  transform: scale(0.5);
+  animation:
+    popIn 0.4s ease-out forwards,
+    floatAnim 4s ease-in-out 0.5s infinite;
+}
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes floatAnim {
+  0%,100%   { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
-.navLinkItem:hover {
-  text-decoration: underline;
+/*─────────────────────────────────────────────────────────────────────────────
+  3) Sidebar: slide+fade, semi-transparent, hoverable
+─────────────────────────────────────────────────────────────────────────────*/
+.navOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 260px;
+  height: 100vh;
+  background: rgba(255,255,255,0.5);        /* more see-through */
+  backdrop-filter: blur(10px);
+
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+
+  z-index: 200;
+  padding-top: 2rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border-right: 2px solid #556B2F;
+  overflow: visible;
+}
+/* “Open” by click */
+.navOverlay.open {
+  transform: translateX(10px);
+  opacity: 1;
+}
+/* “Open” by hover on button or panel */
+.iconButton:hover + .navOverlay,
+.navOverlay:hover {
+  transform: translateX(10px);
+  opacity: 1;
+}
+
+/* ensure links/logo sit above the blurred background */
+.navOverlay .navInner,
+.navOverlay .navList,
+.navOverlay .logo,
+.navOverlay .navLink {
+  position: relative;
+  z-index: 1;
+}
+.navOverlay .navList {
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 2rem;
+  margin-top: 2rem;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  4) Responsive tweaks
+─────────────────────────────────────────────────────────────────────────────*/
+@media (max-width: 600px) {
+  .navOverlay {
+    width: 80%;
+    transform: translateX(calc(-80% + 48px));
+  }
+  .navOverlay.open,
+  .iconButton:hover + .navOverlay,
+  .navOverlay:hover {
+    transform: translateX(5px);
+    shape-rendering: auto;
+  }
 }

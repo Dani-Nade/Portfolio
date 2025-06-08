@@ -1,12 +1,25 @@
-// App.jsx
-import React from "react";
-import Header from "./components/Header/Header";
+import React, { useState, useEffect } from "react";
+import Loading from "./components/Loading/Loading";
+import Header  from "./components/Header/Header";
+// … import other pages …
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // simulate asset fetch / data load
+    const t = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div>
+    <>
       <Header />
-      {/* Below Header you can add other sections (Projects, Footer, etc.) */}
-    </div>
+      {/* … your main page content … */}
+    </>
   );
 }

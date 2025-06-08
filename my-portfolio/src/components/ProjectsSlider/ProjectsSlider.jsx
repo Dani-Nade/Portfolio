@@ -1,22 +1,27 @@
+// src/components/ProjectsSlider/ProjectsSlider.jsx
+
 import React from "react";
 import { projects } from "../Projects/ProjectsData";
 import styles from "./ProjectsSlider.module.css";
 
-export default function ProjectsSlider({ speedPerSlide = 4 }) {
-  // total number of unique slides
-  const count = projects.length;
-  // total duration = speedPerSlide × count (in seconds)
-  const duration = count * speedPerSlide;
-  // duplicate the list so it can scroll seamlessly
-  const items = [...projects, ...projects];
+export default function ProjectsSlider({
+  secondsPerSlide = 8,
+  reverse = false
+}) {
+  // duplicate so we can scroll seamlessly
+  const slides = [...projects, ...projects];
+  const duration = projects.length * secondsPerSlide;
 
   return (
     <div className={styles.sliderContainer}>
       <div
         className={styles.sliderInner}
-        style={{ animationDuration: `${duration}s` }}
+        style={{
+          animationDuration: `${duration}s`,
+          animationDirection: reverse ? "reverse" : "normal"
+        }}
       >
-        {items.map((p, i) => (
+        {slides.map((p, i) => (
           <div key={i} className={styles.slide}>
             <img src={p.image} alt={p.title} className={styles.image} />
             <div className={styles.info}>

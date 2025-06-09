@@ -143,6 +143,7 @@ html {
   font-size: 2rem;
   color: #2E2E2E;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .contactList {
@@ -209,9 +210,10 @@ html {
 
 .blockTitle {
   font-family: 'Japan Daisuki', cursive;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   color: #2E2E2E;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .blockContent,
@@ -263,4 +265,21 @@ html {
 .sliderColumn {
   flex: 1;
 }
+.sectionDivider {
+  width: 90%;
+  max-width: 1200px;
+  height: 2px;
+  background: #ccc;
+  margin: 2rem auto 1rem;
+}
 
+/* dual sliders container */
+.dualSliderWrapper {
+  display: flex;
+  gap: 1rem;
+  width: 90%; max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+.sliderColumn {
+  flex: 1;
+}

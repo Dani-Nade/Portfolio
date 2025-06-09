@@ -177,7 +177,6 @@
             ))}
           </div>
 
-
           {/* ─── About Me ─────────────────────────────────────────── */}
           <section
             id="about"
@@ -211,7 +210,8 @@
               />
             </div>
           </section>
-
+{/* ─── Section Divider ─────────────────────────────────── */}
+        <div className={styles.sectionDivider} />
           {/* ─── Contact Info ─────────────────────────────────────── */}
           <section
             id="contact"
@@ -248,7 +248,8 @@
               </div>
             </div>
           </section>
-
+{/* ─── Section Divider ─────────────────────────────────── */}
+        <div className={styles.sectionDivider} />
           {/* ─── Skills & Education ───────────────────────────────── */}
           <section
             id="skills"
@@ -315,6 +316,11 @@
             </div>
           </section>
 
+
+{/* ─── Section Divider ─────────────────────────────────── */}
+        <div className={styles.sectionDivider} />
+
+{/* ─── Project Slider ─────────────────────────────────── */}
           <div className={styles.dualSliderWrapper}>
           <div className={styles.sliderColumn}>
             <ProjectsSlider secondsPerSlide={8} />

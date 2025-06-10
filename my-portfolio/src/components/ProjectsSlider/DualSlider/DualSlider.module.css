@@ -1,0 +1,23 @@
+.dualSliderWrapper {
+  display: flex;
+  flex-direction: column;  /* vertical stack */
+  height: 100%;
+}
+
+.sliderColumn {
+  flex: 1;
+  overflow: visible;
+}
+
+/* overlap between rows */
+.sliderColumn:not(:last-child) {
+  margin-bottom: -2rem;
+}
+
+/* ensure bottom (reverse) sits on top */
+.sliderColumn:nth-child(1) {
+  z-index: 1;
+}
+.sliderColumn:nth-child(2) {
+  z-index: 2;
+}

@@ -1,5 +1,3 @@
-// src/components/ProjectsSlider/ProjectsSlider.jsx
-
 import React from "react";
 import { projects } from "../Projects/ProjectsData";
 import styles from "./ProjectsSlider.module.css";
@@ -27,6 +25,16 @@ export default function ProjectsSlider({
             <div className={styles.info}>
               <h3 className={styles.title}>{p.title}</h3>
               <p className={styles.shortDesc}>{p.shortDesc}</p>
+            </div>
+
+            {/* Details popup */}
+            <div className={styles.details}>
+              <h4>{p.title} Details</h4>
+              <ul>
+                {p.details.map((line, idx) => (
+                  <li key={idx}>{line}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}

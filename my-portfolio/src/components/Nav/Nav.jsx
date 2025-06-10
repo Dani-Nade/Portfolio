@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Nav.module.css";
+import pacmanSprite from "../../assets/images/NavBarIcon/pacman_sprite.png";
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen,  setMenuOpen]    = useState(false);
 
+  // FRAME COUNT (adjust if you have more/less)
+  const FRAME_COUNT = 3;
+
+  // state for our CSS vars
+  const [spriteData, setSpriteData] = useState({
+    frameW: 0,
+    frameH: 0,
+    offsetX: 0
+  });
+
+  // load sprite to measure it
   useEffect(() => {
-    const handleScroll = () => {
+    const img = new Image();
+    img.src = pacmanSprite;
+    img.onload = () => {
+      const frameW = img.width / FRAME_COUNT;
+      const frameH = img.height;
+      const offsetX = -frameW * (FRAME_COUNT - 1);
+      setSpriteData({ frameW, frameH, offsetX });
+    };
+  }, []);
+
+  // handle scroll toggle
+  useEffect(() => {
+    const onScroll = () => {
       const scrolled = window.scrollY > 100;
       setIsScrolled(scrolled);
       if (!scrolled) setMenuOpen(false);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const toggleMenu = () => setMenuOpen(v => !v);
 
   const items = [
     { href: "#about",   label: "About"   },
@@ -23,15 +47,29 @@ export default function Nav() {
     { href: "#skills",  label: "Skills"  },
   ];
 
+  // inline style for our Pac-Man button CSS vars
+  const pacmanStyle = {
+    "--frame-width":   `${spriteData.frameW}px`,
+    "--frame-height":  `${spriteData.frameH}px`,
+    "--frame-offset":  `${spriteData.offsetX}px`,
+    "backgroundImage": `url(${pacmanSprite})`,
+    "backgroundSize":  `${spriteData.frameW * FRAME_COUNT}px ${spriteData.frameH}px`
+  };
+
   return (
     <>
-      {/* 1) Full navbar at top */}
+      {/* full navbar */}
       {!isScrolled && (
         <nav className={styles.navbar}>
           <div className={styles.navInner}>
-            <a href="#about"  className={styles.logo}>Danish Nadeem</a>
+            <button
+              className={styles.pacmanButton}
+              aria-label="Pac-Man"
+              style={pacmanStyle}
+            />
+            <a href="#about" className={styles.logo}>Danish Nadeem</a>
             <ul className={styles.navList}>
-              {items.map((it) => (
+              {items.map(it => (
                 <li key={it.href}>
                   <a href={it.href} className={styles.navLink}>
                     {it.label}
@@ -43,7 +81,7 @@ export default function Nav() {
         </nav>
       )}
 
-      {/* 2) Floating button once you scroll */}
+      {/* float ☰ after scroll */}
       {isScrolled && (
         <button
           className={styles.iconButton}
@@ -54,14 +92,19 @@ export default function Nav() {
         </button>
       )}
 
-      {/* 3) Sidebar panel */}
+      {/* sidebar */}
       {isScrolled && (
         <div className={`${styles.navOverlay} ${menuOpen ? styles.open : ""}`}>
           <div className={styles.navInner}>
+            <button
+              className={styles.pacmanButton}
+              aria-label="Pac-Man"
+              style={pacmanStyle}
+            />
             <a href="#about" className={styles.logo}>Danish Nadeem</a>
           </div>
           <ul className={styles.navList}>
-            {items.map((it) => (
+            {items.map(it => (
               <li key={it.href}>
                 <a href={it.href} className={styles.navLink}>
                   {it.label}

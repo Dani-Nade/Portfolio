@@ -328,7 +328,7 @@
           <div className={styles.sliderColumn}>
             <ProjectsSlider secondsPerSlide={8} reverse />
           </div>
-        </div>
+        </div>  
 
 
         </div>

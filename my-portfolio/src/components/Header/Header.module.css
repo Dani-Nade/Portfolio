@@ -4,10 +4,18 @@
   0) reset, fonts, smooth scroll
 ─────────────────────────────────────────────────────────────────────────────*/
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
-
 html {
   scroll-behavior: smooth;
 }
+
+@font-face {
+  font-family: 'JD';
+  src: url('') format('woff2'),
+       url('../../assets/fonts/Japan\ Daisuki.otf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 :global(html, body) {
   margin: 0;
@@ -96,7 +104,7 @@ html {
 }
 
 .aboutTitle {
-  font-family: 'Japan Daisuki', cursive;
+  font-family: 'JD', cursive;
   font-size: 2.5rem;
   color: #2E2E2E;
   margin-bottom: 1rem;
@@ -139,7 +147,7 @@ html {
 }
 
 .contactTitle {
-  font-family: 'Japan Daisuki', cursive;
+  font-family: 'JD', cursive;
   font-size: 2rem;
   color: #2E2E2E;
   margin-bottom: 1rem;
@@ -209,7 +217,7 @@ html {
 }
 
 .blockTitle {
-  font-family: 'Japan Daisuki', cursive;
+  font-family: 'JD', cursive;
   font-size: 1.6rem;
   color: #2E2E2E;
   margin-bottom: 0.5rem;

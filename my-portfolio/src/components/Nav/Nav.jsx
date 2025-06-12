@@ -7,7 +7,7 @@ export default function Nav() {
   const [menuOpen,  setMenuOpen]    = useState(false);
 
   // FRAME COUNT (adjust if you have more/less)
-  const FRAME_COUNT = 3;
+  const FRAME_COUNT = 5;
 
   // state for our CSS vars
   const [spriteData, setSpriteData] = useState({
@@ -48,13 +48,14 @@ export default function Nav() {
   ];
 
   // inline style for our Pac-Man button CSS vars
-  const pacmanStyle = {
-    "--frame-width":   `${spriteData.frameW}px`,
-    "--frame-height":  `${spriteData.frameH}px`,
-    "--frame-offset":  `${spriteData.offsetX}px`,
-    "backgroundImage": `url(${pacmanSprite})`,
-    "backgroundSize":  `${spriteData.frameW * FRAME_COUNT}px ${spriteData.frameH}px`
-  };
+ const pacmanStyle = {
+  "--frame-width":   `${spriteData.frameW}px`,
+  "--frame-height":  `${spriteData.frameH}px`,
+  "--frame-offset":  `${spriteData.offsetX}px`,
+  "--sprite-width":  `${spriteData.frameW * FRAME_COUNT}px`,
+  backgroundImage:    `url(${pacmanSprite})`,
+  backgroundSize:     `${spriteData.frameW * FRAME_COUNT}px ${spriteData.frameH}px`
+};
 
   return (
     <>

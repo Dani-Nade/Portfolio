@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --raisin: #1A1423;
+  --violet: #3D314A;
+  --eggplant: #684756;
+  --chamoisee: #96705B;
+  --beaver: #AB8476;
+}
+
+body {
+  background: radial-gradient(
+    circle at 50% 30%,
+    var(--eggplant) 0%,
+    var(--raisin) 70%
+  );
+  color: var(--beaver);
+  font-family: "Inter", "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Buttons */
+.btn {
+  @apply inline-block rounded-lg border px-6 py-2.5 text-[15px] font-medium
+  transition-all duration-300 ease-in-out;
+  background-color: var(--chamoisee);
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: var(--beaver);
+  color: var(--raisin);
+  transform: scale(1.05);
+}

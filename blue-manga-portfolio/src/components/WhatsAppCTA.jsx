@@ -6,7 +6,7 @@ export default function WhatsAppCTA() {
     <a
       className="fixed right-4 bottom-4 z-50 font-semibold shadow-xl flex items-center gap-2 rounded-full px-4 py-2"
       style={{ background: "#A17444FF", color: "#000000FF" }}
-      href="https://wa.me/923001234567"
+      href="https://wa.me/923320403824"
       target="_blank"
       rel="noreferrer"
     >

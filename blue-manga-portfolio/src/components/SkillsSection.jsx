@@ -1,27 +1,56 @@
+// src/components/SkillsSection.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  SiReact,
-  SiFlutter,
-  SiJavascript,
+  SiCplusplus,
+  SiC,
+  SiPython,
+  SiOpenjdk,
   SiHtml5,
   SiCss3,
-  SiDocker,
-  SiPython,
-  SiFirebase,
+  SiJavascript,
+  SiReact,
+  SiNodedotjs,
+  SiFlutter,
+  SiAndroid,
   SiDart,
+  SiMongodb,
+  SiMysql,
+  SiDocker,
+  SiKubernetes,
+  SiJenkins,
+  SiFigma,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+  SiAdobepremierepro,
+  SiAdobeaftereffects,
+  SiGimp,
 } from "react-icons/si";
 
 const skills = [
-  { icon: <SiReact />, label: "React" },
-  { icon: <SiFlutter />, label: "Flutter" },
-  { icon: <SiJavascript />, label: "JavaScript" },
-  { icon: <SiHtml5 />, label: "HTML" },
-  { icon: <SiCss3 />, label: "CSS" },
-  { icon: <SiDart />, label: "Dart" },
-  { icon: <SiDocker />, label: "Docker" },
-  { icon: <SiFirebase />, label: "Firebase" },
+  { icon: <SiCplusplus />, label: "C++" },
+  { icon: <SiC />, label: "C" },
   { icon: <SiPython />, label: "Python" },
+  { icon: <SiOpenjdk />, label: "Java" },
+  { icon: <SiHtml5 />, label: "HTML5" },
+  { icon: <SiCss3 />, label: "CSS3" },
+  { icon: <SiJavascript />, label: "JavaScript" },
+  { icon: <SiReact />, label: "React" },
+  { icon: <SiNodedotjs />, label: "Node.js" },
+  { icon: <SiFlutter />, label: "Flutter" },
+  { icon: <SiAndroid />, label: "Android" },
+  { icon: <SiDart />, label: "Dart" },
+  { icon: <SiMongodb />, label: "MongoDB" },
+  { icon: <SiMysql />, label: "MySQL" },
+  { icon: <SiDocker />, label: "Docker" },
+  { icon: <SiKubernetes />, label: "Kubernetes" },
+  { icon: <SiJenkins />, label: "Jenkins" },
+  { icon: <SiFigma />, label: "Figma" },
+  { icon: <SiAdobephotoshop />, label: "Photoshop" },
+  { icon: <SiAdobeillustrator />, label: "Illustrator" },
+  { icon: <SiAdobepremierepro />, label: "Premiere Pro" },
+  { icon: <SiAdobeaftereffects />, label: "After Effects" },
+  { icon: <SiGimp />, label: "GIMP" },
 ];
 
 export default function SkillsSection() {
@@ -31,8 +60,7 @@ export default function SkillsSection() {
       className="py-24 bg-[#1a141f] text-center relative overflow-hidden"
       data-reveal="fade-up"
     >
-    
-      <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
         {skills.map((s, i) => (
           <motion.div
             key={i}

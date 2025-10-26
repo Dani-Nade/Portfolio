@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "react-icons": "^5.5.0"
+  }
+}

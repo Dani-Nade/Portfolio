@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Lenis from "@studio-freight/lenis"; // 🌙 smooth scroll
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import SkillsSection from "./components/SkillsSection.jsx";
@@ -9,7 +10,7 @@ import ProgressBar from "./components/ProgressBar.jsx";
 import AdminPanel from "./components/AdminPanel.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import AnimatedTitle from "./components/util/AnimatedTitle.jsx";
-import StarryBackground from "./components/StarryBackground.jsx"; // 🌌 Import it here
+import StarryBackground from "./components/StarryBackground.jsx";
 import useReveal from "./hooks/useReveal.js";
 import useBackgroundCycle from "./hooks/useBackgroundCycle.js";
 
@@ -22,6 +23,24 @@ export default function App() {
     const onHash = () => setRoute(window.location.hash || "#/");
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  // === 🌙 Smooth Scroll Setup (Lenis) ===
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4, // slower, elegant glide
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
   }, []);
 
   const isAdmin = route.startsWith("#/admin");
@@ -70,7 +89,7 @@ export default function App() {
       {/* === NAVBAR === */}
       <Navbar active={isAdmin ? "admin" : "home"} />
 
-      {/* === STAR BACKGROUND (PERSISTENT) === */}
+      {/* === STAR BACKGROUND (GLOBAL) === */}
       {!isAdmin && <StarryBackground />}
 
       <main>
@@ -131,11 +150,7 @@ export default function App() {
           </>
         ) : (
           /* === ADMIN PANEL === */
-          <section
-            className="py-10"
-            data-reveal="fade-up"
-            data-section="admin"
-          >
+          <section className="py-10" data-reveal="fade-up" data-section="admin">
             <div className="mx-auto w-[min(1100px,92vw)]">
               <AdminPanel />
             </div>

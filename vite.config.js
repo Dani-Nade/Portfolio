@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/portfolio/blue-manga-portfolio", // 👈 must match your repo name
+  base: "/Portfolio/", // 👈 must match repo name *exactly* (capital P)
 });

@@ -3,26 +3,7 @@ import altImage from "./alt.jpeg";
 import expTrackGif from "./ExpTrack.gif";
 
 const projects = [
-  {
-    title: "PixelRNN Image Completion",
-    subtitle:
-      "A deep learning model for reconstructing images pixel-by-pixel using autoregressive networks.",
-    mediaType: "image",
-    mediaUrl: altImage,
-    href: "https://github.com/Dani-Nade/PixelRNN",
-    tags: ["Deep Learning", "Generative AI"],
-    tech: ["PyTorch", "NumPy", "Matplotlib"],
-  },
-  {
-    title: "Shakespeare LSTM",
-    subtitle:
-      "Character-level LSTM model generating next-word predictions trained on Shakespeare’s writing style.",
-    mediaType: "image",
-    mediaUrl: altImage,
-    href: "https://github.com/Dani-Nade/ShakespeareLSTM",
-    tags: ["AI", "Text Generation"],
-    tech: ["TensorFlow", "Python", "Streamlit"],
-  },
+
   {
     title: "Expense Tracker",
     subtitle:
@@ -49,7 +30,7 @@ const projects = [
       "Mobile recipe and meal planner app with categories, filters, and favorites integration.",
     mediaType: "image",
     mediaUrl: altImage,
-    href: "https://github.com/Dani-Nade/Meals-App",
+    href: "https://github.com/Dani-Nade/MEAL_APP",
     tags: ["Food", "Mobile App"],
     tech: ["Flutter", "Dart", "Provider"],
   },

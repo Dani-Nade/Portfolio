@@ -3,5 +3,8 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Portfolio/", // 👈 must match repo name *exactly* (capital P)
+  base: "/Portfolio/",
+  resolve: {
+    dedupe: ["react", "react-dom"], // ✅ prevent duplicated React resolution
+  },
 });

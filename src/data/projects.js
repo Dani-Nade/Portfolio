@@ -50,7 +50,7 @@ const projects = [
       "An AI-driven diagnostic system for early lung disease detection using medical imaging.",
     mediaType: "image",
     mediaUrl: altImage,
-    href: "https://github.com/Dani-Nade/PulmoGuardAI",
+    href: "https://github.com/Dani-Nade/PulmoGuard-AI",
     tags: ["Healthcare", "AI"],
     tech: ["PyTorch", "OpenCV", "NumPy", "Grad-CAM"],
   },
